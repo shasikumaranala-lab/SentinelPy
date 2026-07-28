@@ -68,12 +68,14 @@ def test_detect_threats():
     ) as mock_analyze:
 
         result = analyzer.detect_threats(
+            LogSource.LINUX,
             ["event1", "event2"]
         )
 
     assert result == suspicious_events
 
     mock_analyze.assert_called_once_with(
+        LogSource.LINUX,
         ["event1", "event2"]
     )
 
@@ -184,14 +186,16 @@ def test_generate_report():
             suspicious_events=[],
             report_format=ReportFormat.JSON,
             output_path=Path("report.json"),
-            statistics=None
+            statistics=None,
+            timeline=None
         )
 
     mock_generate.assert_called_once_with(
         suspicious_events=[],
         report_format=ReportFormat.JSON,
         output_path=Path("report.json"),
-        statistics=None
+        statistics=None,
+        timeline=None
     )
 
 def test_analyze():
@@ -256,7 +260,10 @@ def test_analyze():
 
     mock_parse.assert_called_once()
 
-    mock_detect.assert_called_once_with(events)
+    mock_detect.assert_called_once_with(
+        LogSource.LINUX,
+        events
+    )
 
     mock_enrich.assert_called_once_with(suspicious)
 

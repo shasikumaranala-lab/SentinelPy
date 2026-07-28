@@ -37,8 +37,10 @@ def test_generate_csv_report(tmp_path):
     output_file = tmp_path / "report.csv"
 
     reporter.generate(
-        [create_event()],
-        output_file
+        suspicious_events=[create_event()],
+        statistics=None,
+        timeline=None,
+        output_path=output_file
     )
 
     assert output_file.exists()

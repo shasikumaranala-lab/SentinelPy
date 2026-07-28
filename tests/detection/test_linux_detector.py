@@ -40,4 +40,4 @@ def test_bruteforce_detection():
     assert detections[0].affected_service == "SSH"
 
     assert detections[0].recommendation is not None
-    assert detections[0].detection_name == "SSH Brute Force"
+    assert detections[0].detection_name == "SSH Brute Force Attack"

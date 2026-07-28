@@ -35,7 +35,7 @@ def test_sql_injection_detection():
     detections = detector.analyze([event])
 
     assert len(detections) == 1
-    assert detections[0].detection_name == "SQL Injection"
+    assert detections[0].detection_name == "SQL Injection Attempt"
 
 
 def test_xss_detection():

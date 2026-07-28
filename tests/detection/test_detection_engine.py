@@ -115,58 +115,80 @@ def test_linux_events():
 
     engine = DetectionEngine()
 
-    detections = engine.analyze([create_linux_event()])
+    detections = engine.analyze(
+        LogSource.LINUX,
+        [create_linux_event()]
+    )
 
     assert len(detections) == 0
+
 
 def test_apache_events():
 
     engine = DetectionEngine()
 
-    detections = engine.analyze([create_apache_event()])
+    detections = engine.analyze(
+        LogSource.APACHE,
+        [create_apache_event()]
+    )
 
     assert len(detections) == 1
 
     assert detections[0].affected_service == "Apache"
 
+
 def test_windows_events():
 
     engine = DetectionEngine()
 
-    detections = engine.analyze([create_windows_event()])
+    detections = engine.analyze(
+        LogSource.WINDOWS,
+        [create_windows_event()]
+    )
 
     assert len(detections) == 0
+
 
 def test_aws_events():
 
     engine = DetectionEngine()
 
-    detections = engine.analyze([create_aws_event()])
+    detections = engine.analyze(
+        LogSource.AWS,
+        [create_aws_event()]
+    )
 
     assert len(detections) == 1
 
     assert detections[0].affected_service == "AWS IAM"
 
+
 def test_multiple_sources():
 
     engine = DetectionEngine()
 
-    events = [
+    apache_detections = engine.analyze(
+        LogSource.APACHE,
+        [create_apache_event()]
+    )
 
-        create_apache_event(),
+    aws_detections = engine.analyze(
+        LogSource.AWS,
+        [create_aws_event()]
+    )
 
-        create_aws_event()
-
-    ]
-
-    detections = engine.analyze(events)
+    detections = apache_detections + aws_detections
 
     assert len(detections) == 2
+
 
 def test_empty_events():
 
     engine = DetectionEngine()
 
-    detections = engine.analyze([])
+    detections = engine.analyze(
+        LogSource.LINUX,
+        []
+    )
 
     assert detections == []
