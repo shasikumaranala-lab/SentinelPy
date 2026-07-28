@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sentinelpy"
+version = "1.0.0"
+description = "Security Log Analysis and Threat Detection Tool"
+readme = "README.md"
+requires-python = ">=3.12"
+
+authors = [
+    {name = "Your Name"}
+]
+
+dependencies = [
+    "PyYAML"
+]
+
+[project.scripts]
+sentinelpy = "main:main"

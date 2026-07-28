@@ -1,0 +1,141 @@
+linux:
+
+  brute_force:
+    enabled: true
+    name: SSH Brute Force Attack
+    severity: HIGH
+    max_failed_logins: 5
+    time_window_seconds: 300
+    recommendation: Block the attacking IP and investigate the affected account.
+
+  password_spray:
+    enabled: true
+    name: Password Spray Attack
+    severity: HIGH
+    unique_accounts_threshold: 5
+    recommendation: Investigate repeated authentication attempts across multiple accounts.
+
+  privilege_escalation:
+    enabled: true
+    name: Privileged Account Login
+    severity: MEDIUM
+    privileged_users:
+      - root
+    description: Privileged account logged in successfully.
+    recommendation: Verify that the login was authorized.
+
+windows:
+
+  failed_login:
+    enabled: true
+    name: Windows Brute Force Attack
+    severity: HIGH
+    max_failed_logins: 5
+    time_window_seconds: 300
+    recommendation: Investigate repeated failed login attempts.
+
+  account_lockout:
+    enabled: true
+    name: Account Lockout
+    severity: MEDIUM
+    recommendation: Investigate why the account was locked.
+
+  new_user_creation:
+    enabled: true
+    name: New User Created
+    severity: HIGH
+    recommendation: Verify the new account creation.
+
+  privilege_group_change:
+    enabled: true
+    name: Privileged Group Membership Changed
+    severity: CRITICAL
+    recommendation: Verify the administrative group modification.
+
+
+apache:
+
+  sql_injection:
+    enabled: true
+    name: SQL Injection Attempt
+    severity: HIGH
+    patterns:
+      - "union select"
+      - "' or "
+      - "\" or "
+      - "--"
+      - "drop table"
+      - "insert into"
+      - "update "
+      - "delete from"
+      - "sleep("
+      - "benchmark("
+    recommendation: Block the source IP and investigate the request.
+
+  xss:
+    enabled: true
+    name: Cross Site Scripting
+    severity: HIGH
+    patterns:
+      - "<script"
+      - "%3cscript"
+      - "javascript:"
+      - "onerror="
+      - "onload="
+      - "alert("
+    recommendation: Validate and sanitize user input.
+
+  directory_traversal:
+    enabled: true
+    name: Directory Traversal
+    severity: HIGH
+    patterns:
+      - "../"
+      - "..\\"
+      - "%2e%2e"
+      - "..%2f"
+      - "..%5c"
+      - "/etc/passwd"
+      - "system32"
+    recommendation: Investigate attempted file system access.
+
+  scanner_detection:
+    enabled: true
+    name: Scanner Detected
+    severity: MEDIUM
+    recommendation: Review scanning activity.
+
+aws:
+
+  root_login:
+    enabled: true
+    name: AWS Root Login
+    severity: CRITICAL
+    event_name: ConsoleLogin
+    recommendation: Investigate any root account login immediately.
+
+  iam_user_creation:
+    enabled: true
+    name: IAM User Created
+    severity: HIGH
+    event_name: CreateUser
+    recommendation: Verify the newly created IAM user.
+
+  policy_change:
+    enabled: true
+    name: IAM Policy Attached
+    severity: HIGH
+    event_name: AttachUserPolicy
+    recommendation: Review the attached IAM policy.
+
+  security_group_change:
+    enabled: true
+    name: Security Group Modified
+    severity: HIGH
+    event_name: AuthorizeSecurityGroupIngress
+    recommendation: Verify the security group ingress rule.
+
+kubernetes:
+
+  privileged_container:
+    enabled: true

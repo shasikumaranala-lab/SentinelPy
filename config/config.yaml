@@ -1,0 +1,17 @@
+application:
+  name: SentinelPy
+  version: 1.0.0
+
+logging:
+  level: INFO
+
+report:
+  default_format: html
+  output_directory: output
+
+threat_intelligence:
+  enabled: true
+
+analysis:
+  save_timeline: true
+  generate_statistics: true

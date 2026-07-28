@@ -1,0 +1,186 @@
+linux:
+
+  brute_force:
+
+    enabled: true
+    name: SSH Brute Force
+    severity: HIGH
+
+    max_failed_logins: 5
+    time_window_seconds: 300
+
+    recommendation: Block the source IP and investigate authentication attempts.
+
+  password_spray:
+
+    enabled: true
+    name: Password Spray
+    severity: HIGH
+
+    unique_accounts_threshold: 5
+
+    recommendation: Investigate the attacking IP.
+
+  privilege_escalation:
+
+    enabled: true
+    name: Privilege Escalation
+    severity: CRITICAL
+
+    privileged_users:
+      - root
+
+    recommendation: Verify administrator activity immediately.
+
+
+apache:
+
+  sql_injection:
+
+    enabled: true
+    name: SQL Injection
+    severity: HIGH
+
+    patterns:
+      - "union select"
+      - "' or "
+      - "\" or "
+      - "--"
+      - "drop table"
+      - "insert into"
+      - "delete from"
+      - "sleep("
+      - "benchmark("
+
+    recommendation: Investigate the request and validate application input.
+
+
+  xss:
+
+    enabled: true
+    name: Cross Site Scripting
+    severity: HIGH
+
+    patterns:
+      - "<script"
+      - "%3cscript"
+      - "javascript:"
+      - "onerror="
+      - "onload="
+      - "alert("
+
+    recommendation: Validate and sanitize user input.
+
+
+  directory_traversal:
+
+    enabled: true
+    name: Directory Traversal
+    severity: HIGH
+
+    patterns:
+      - "../"
+      - "..\\"
+      - "%2e%2e"
+      - "..%2f"
+      - "..%5c"
+      - "/etc/passwd"
+      - "system32"
+
+    recommendation: Review requested resources.
+
+
+  scanner_detection:
+
+    enabled: true
+    name: Scanner Detection
+    severity: MEDIUM
+
+    user_agents:
+      - sqlmap
+      - nikto
+      - burp
+      - curl
+      - wget
+      - python-requests
+      - go-http-client
+
+    recommendation: Review reconnaissance activity.
+
+
+windows:
+
+  failed_login:
+
+    enabled: true
+    name: Failed Login Burst
+    severity: HIGH
+
+    event_id: 4625
+
+    max_failed_logins: 5
+    time_window_seconds: 300
+
+  account_lockout:
+
+    enabled: true
+    name: Account Lockout
+    severity: HIGH
+
+    event_id: 4740
+
+
+  new_user_creation:
+
+    enabled: true
+    name: New User Creation
+    severity: MEDIUM
+
+    event_id: 4720
+
+
+  privilege_group_change:
+
+    enabled: true
+    name: Privileged Group Change
+    severity: CRITICAL
+
+    event_id: 4728
+
+
+aws:
+
+  root_login:
+
+    enabled: true
+    name: Root Console Login
+    severity: CRITICAL
+
+    event_name: ConsoleLogin
+
+
+  iam_user_creation:
+
+    enabled: true
+    name: IAM User Created
+    severity: HIGH
+
+    event_name: CreateUser
+
+
+  policy_change:
+
+    enabled: true
+    name: IAM Policy Change
+    severity: HIGH
+
+    event_name: AttachUserPolicy
+
+
+  security_group_change:
+
+    enabled: true
+    name: Security Group Change
+    severity: HIGH
+
+    event_name: AuthorizeSecurityGroupIngress
