@@ -115,6 +115,26 @@ SentinelPy/
 └── README.md
 ```
 
+## Command Line Interface
+
+SentinelPy can analyze security logs directly from the terminal.
+
+![CLI](docs/screenshots/Terminal_Output.png)
+
+## HTML Report
+
+### Security Overview
+
+![Overview](docs/screenshots/HTML_part_1.png)
+
+### Security Statistics & Detected Threats
+
+![Statistics](docs/screenshots/HTML_Part_2.png)
+
+### Investigation Timeline
+
+![Timeline](docs/screenshots/HTML_Part_3.png)
+
 ## Installation
 
 ### 1. Clone the Repository
@@ -354,7 +374,7 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 
 **Anala Shasi Kumar**
 
-- GitHub: https://github.com/<your-username>
+- GitHub: https://github.com/shasikumaranala-lab/
 - LinkedIn: https://www.linkedin.com/in/anala-shasi-kumar-8325b6290/
 
 If you found this project helpful, consider giving it a ⭐ on GitHub.

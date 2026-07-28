@@ -2,6 +2,7 @@ from pathlib import Path
 from datetime import datetime
 from collections import Counter
 from dataclasses import asdict
+from shutil import copyfile
 
 
 class HTMLReport:
@@ -16,6 +17,11 @@ class HTMLReport:
 
         template = self.load_template()
         css = self.load_css()
+
+        copyfile(
+            Path(__file__).parent / "templates" / "style.css",
+            output_path.parent / "style.css",
+        )
 
         html = (
             template
