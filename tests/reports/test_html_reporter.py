@@ -3,7 +3,7 @@ from datetime import datetime
 from config.constants import Severity
 from models.suspicious_event import SuspiciousEvent
 
-from reports.html_reporter import HTMLReporter
+from reports.html_reporter import HTMLReport
 
 def create_event():
 
@@ -32,7 +32,7 @@ def create_event():
 
 def test_generate_html_report(tmp_path):
 
-    reporter = HTMLReporter()
+    reporter = HTMLReport()
 
     output = tmp_path / "report.html"
 
